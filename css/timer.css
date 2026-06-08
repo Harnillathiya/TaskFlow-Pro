@@ -1,0 +1,343 @@
+/* ============================================================
+   TIMER.CSS — Pomodoro Timer, Ring, Controls, Settings
+   ============================================================ */
+
+/* ─── Timer Container ──────────────────────────────────────── */
+.timer-container {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  align-items: start;
+}
+
+/* ─── Timer Card ───────────────────────────────────────────── */
+.timer-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-8) var(--space-6);
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur) var(--glass-saturation);
+  -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturation);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-glass);
+  transition: border-color var(--transition-slow), box-shadow var(--transition-slow);
+}
+
+/* Active state — pulsing glow */
+.timer-card.active {
+  border-color: rgba(99, 102, 241, 0.3);
+  animation: ringPulse 2.5s ease-in-out infinite;
+}
+
+/* ─── Mode Tabs (Pill style) ───────────────────────────────── */
+.timer-mode-tabs {
+  display: flex;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  gap: 2px;
+}
+
+.timer-tab {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-normal) var(--ease-out-expo);
+  white-space: nowrap;
+}
+
+.timer-tab:hover {
+  color: var(--text-secondary);
+}
+
+.timer-tab.active {
+  background: var(--primary-gradient);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm), var(--primary-glow-sm);
+}
+
+/* ─── Timer Display (Ring) ─────────────────────────────────── */
+.timer-display {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: var(--space-4) auto;
+}
+
+.timer-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.timer-ring-bg {
+  fill: none;
+  stroke: var(--bg-tertiary);
+  stroke-width: 8;
+}
+
+.timer-ring-progress {
+  fill: none;
+  stroke: url(#ring-gradient);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: var(--ring-circumference);
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+  filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.4));
+}
+
+/* Fallback stroke color if no gradient defs */
+.timer-ring-progress {
+  stroke: var(--primary);
+}
+
+/* ─── Timer Time Text ──────────────────────────────────────── */
+.timer-time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: baseline;
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.timer-colon {
+  animation: blink 1.2s ease-in-out infinite;
+  margin: 0 2px;
+}
+
+/* ─── Timer Controls ───────────────────────────────────────── */
+.timer-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.timer-btn {
+  min-width: 120px;
+}
+
+/* ─── Task Link ────────────────────────────────────────────── */
+.timer-task-link {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+}
+
+.timer-task-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--text-muted);
+}
+
+.timer-task-dropdown {
+  width: 100%;
+  padding: var(--space-2) var(--space-4);
+  background: var(--bg-input);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round'%3E%3Cpolyline points='6,9 12,15 18,9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 36px;
+  transition: all var(--transition-fast);
+}
+
+.timer-task-dropdown:hover {
+  border-color: var(--border-hover);
+}
+
+.timer-task-dropdown:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* ─── Session Info ─────────────────────────────────────────── */
+.session-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+}
+
+.session-label {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.session-dots {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.session-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-primary);
+  border: 1.5px solid var(--border-primary);
+  transition: all var(--transition-normal) var(--ease-out-back);
+}
+
+.session-dot.filled {
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.4);
+}
+
+.session-count {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* ─── Timer Settings Card ──────────────────────────────────── */
+.timer-settings-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-5);
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur) var(--glass-saturation);
+  -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturation);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-glass);
+}
+
+.settings-title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--text-primary);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-secondary);
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-secondary);
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+.settings-input {
+  width: 64px;
+  padding: var(--space-2) var(--space-2);
+  text-align: center;
+  background: var(--bg-input);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.settings-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* Hide spinner arrows for number inputs */
+.settings-input::-webkit-inner-spin-button,
+.settings-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.settings-input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* ─── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .timer-container {
+    grid-template-columns: 1fr;
+    padding: var(--space-4);
+    max-width: 500px;
+  }
+
+  .timer-card {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .timer-display {
+    width: 200px;
+    height: 200px;
+  }
+
+  .timer-time {
+    font-size: 3rem;
+  }
+
+  .timer-btn {
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timer-container {
+    padding: var(--space-3);
+  }
+
+  .timer-mode-tabs {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .timer-tab {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-xs);
+  }
+
+  .timer-controls {
+    gap: var(--space-3);
+  }
+
+  .timer-btn {
+    min-width: 90px;
+  }
+}

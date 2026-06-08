@@ -1,0 +1,214 @@
+/* ============================================================
+   VARIABLES.CSS — TaskFlow Pro Design System Tokens
+   ============================================================ */
+
+/* ─── Dark Theme (Default) ─────────────────────────────────── */
+:root,
+[data-theme='dark'] {
+  /* Backgrounds */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --bg-elevated: rgba(30, 41, 59, 0.8);
+  --bg-glass: rgba(30, 41, 59, 0.6);
+  --bg-glass-strong: rgba(30, 41, 59, 0.85);
+  --bg-overlay: rgba(0, 0, 0, 0.6);
+  --bg-hover: rgba(99, 102, 241, 0.08);
+  --bg-active: rgba(99, 102, 241, 0.15);
+  --bg-input: rgba(15, 23, 42, 0.6);
+
+  /* Text */
+  --text-primary: #f8fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dimmed: #64748b;
+  --text-inverse: #0f172a;
+
+  /* Borders */
+  --border-primary: rgba(148, 163, 184, 0.12);
+  --border-secondary: rgba(148, 163, 184, 0.08);
+  --border-hover: rgba(148, 163, 184, 0.2);
+  --border-focus: rgba(99, 102, 241, 0.5);
+  --border-glass: rgba(148, 163, 184, 0.1);
+
+  /* Scrollbar */
+  --scrollbar-track: rgba(15, 23, 42, 0.4);
+  --scrollbar-thumb: rgba(100, 116, 139, 0.4);
+  --scrollbar-thumb-hover: rgba(100, 116, 139, 0.6);
+
+  /* Selection */
+  --selection-bg: rgba(99, 102, 241, 0.3);
+  --selection-text: #f8fafc;
+}
+
+/* ─── Light Theme ──────────────────────────────────────────── */
+[data-theme='light'] {
+  /* Backgrounds */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e2e8f0;
+  --bg-elevated: rgba(255, 255, 255, 0.9);
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-glass-strong: rgba(255, 255, 255, 0.9);
+  --bg-overlay: rgba(15, 23, 42, 0.4);
+  --bg-hover: rgba(99, 102, 241, 0.06);
+  --bg-active: rgba(99, 102, 241, 0.1);
+  --bg-input: rgba(241, 245, 249, 0.8);
+
+  /* Text */
+  --text-primary: #0f172a;
+  --text-secondary: #1e293b;
+  --text-muted: #64748b;
+  --text-dimmed: #94a3b8;
+  --text-inverse: #f8fafc;
+
+  /* Borders */
+  --border-primary: rgba(15, 23, 42, 0.1);
+  --border-secondary: rgba(15, 23, 42, 0.06);
+  --border-hover: rgba(15, 23, 42, 0.15);
+  --border-focus: rgba(99, 102, 241, 0.5);
+  --border-glass: rgba(15, 23, 42, 0.08);
+
+  /* Scrollbar */
+  --scrollbar-track: rgba(241, 245, 249, 0.6);
+  --scrollbar-thumb: rgba(148, 163, 184, 0.4);
+  --scrollbar-thumb-hover: rgba(148, 163, 184, 0.6);
+
+  /* Selection */
+  --selection-bg: rgba(99, 102, 241, 0.2);
+  --selection-text: #0f172a;
+}
+
+/* ─── Primary / Accent — Indigo ────────────────────────────── */
+:root {
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
+  --primary-bg: rgba(99, 102, 241, 0.1);
+  --primary-bg-hover: rgba(99, 102, 241, 0.18);
+  --primary-gradient: linear-gradient(135deg, #818cf8 0%, #6366f1 50%, #4f46e5 100%);
+  --primary-glow: 0 0 20px rgba(99, 102, 241, 0.35), 0 0 40px rgba(99, 102, 241, 0.15);
+  --primary-glow-sm: 0 0 12px rgba(99, 102, 241, 0.25);
+
+  /* ─── Priority Colors ──────────────────────────────────── */
+  --priority-urgent: #ef4444;
+  --priority-urgent-bg: rgba(239, 68, 68, 0.12);
+  --priority-urgent-glow: 0 0 10px rgba(239, 68, 68, 0.3);
+  --priority-high: #f97316;
+  --priority-high-bg: rgba(249, 115, 22, 0.12);
+  --priority-medium: #eab308;
+  --priority-medium-bg: rgba(234, 179, 8, 0.12);
+  --priority-low: #22c55e;
+  --priority-low-bg: rgba(34, 197, 94, 0.12);
+
+  /* ─── Category Colors ──────────────────────────────────── */
+  --category-work: #6366f1;
+  --category-work-bg: rgba(99, 102, 241, 0.12);
+  --category-personal: #ec4899;
+  --category-personal-bg: rgba(236, 72, 153, 0.12);
+  --category-health: #22c55e;
+  --category-health-bg: rgba(34, 197, 94, 0.12);
+  --category-learning: #f59e0b;
+  --category-learning-bg: rgba(245, 158, 11, 0.12);
+  --category-finance: #06b6d4;
+  --category-finance-bg: rgba(6, 182, 212, 0.12);
+
+  /* ─── Semantic Colors ──────────────────────────────────── */
+  --success: #22c55e;
+  --success-bg: rgba(34, 197, 94, 0.12);
+  --error: #ef4444;
+  --error-bg: rgba(239, 68, 68, 0.12);
+  --warning: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.12);
+  --info: #3b82f6;
+  --info-bg: rgba(59, 130, 246, 0.12);
+
+  /* ─── Kanban Column Dot Colors ─────────────────────────── */
+  --dot-todo: #94a3b8;
+  --dot-in-progress: #f59e0b;
+  --dot-done: #22c55e;
+
+  /* ─── Spacing Scale (4px base) ─────────────────────────── */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+
+  /* ─── Border Radius ────────────────────────────────────── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ─── Shadows ──────────────────────────────────────────── */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16), 0 4px 8px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-glow-primary: 0 4px 16px rgba(99, 102, 241, 0.3), 0 0 0 1px rgba(99, 102, 241, 0.1);
+  --shadow-card-hover: 0 12px 36px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+
+  /* ─── Typography ───────────────────────────────────────── */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  --text-xs: 0.6875rem;    /* 11px */
+  --text-sm: 0.8125rem;    /* 13px */
+  --text-base: 0.9375rem;  /* 15px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.3125rem;    /* 21px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 2rem;        /* 32px */
+  --text-4xl: 2.5rem;      /* 40px */
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.08em;
+
+  /* ─── Z-Index Layers ───────────────────────────────────── */
+  --z-base: 1;
+  --z-dropdown: 30;
+  --z-sidebar: 40;
+  --z-overlay: 50;
+  --z-modal: 100;
+  --z-toast: 200;
+  --z-tooltip: 300;
+
+  /* ─── Transitions ──────────────────────────────────────── */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
+  --transition-spring: 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ─── Glass / Backdrop ─────────────────────────────────── */
+  --glass-blur: blur(16px);
+  --glass-blur-strong: blur(24px);
+  --glass-saturation: saturate(180%);
+
+  /* ─── Sidebar Dimensions ───────────────────────────────── */
+  --sidebar-width: 260px;
+
+  /* ─── Timer Ring ───────────────────────────────────────── */
+  --ring-circumference: 628.32; /* 2 * PI * 100 */
+  --completion-ring-circumference: 439.82; /* 2 * PI * 70 */
+}

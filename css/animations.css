@@ -1,0 +1,310 @@
+/* ============================================================
+   ANIMATIONS.CSS — Keyframes & Animation Utility Classes
+   ============================================================ */
+
+/* ─── Fade ─────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ─── Slide In ─────────────────────────────────────────────── */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Slide Out ────────────────────────────────────────────── */
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* ─── Scale ────────────────────────────────────────────────── */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* ─── Shake (error feedback) ───────────────────────────────── */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-4px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(4px);
+  }
+}
+
+/* ─── Pulse ────────────────────────────────────────────────── */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.85;
+  }
+}
+
+/* ─── Blink (timer colon) ──────────────────────────────────── */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ─── Shimmer (loading skeleton) ───────────────────────────── */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ─── Card Entrance (staggered) ────────────────────────────── */
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─── Ring Pulse (active timer glow) ───────────────────────── */
+@keyframes ringPulse {
+  0%, 100% {
+    box-shadow:
+      var(--shadow-glass),
+      0 0 0 0 rgba(99, 102, 241, 0);
+  }
+  50% {
+    box-shadow:
+      var(--shadow-glass),
+      0 0 0 6px rgba(99, 102, 241, 0.08),
+      0 0 24px rgba(99, 102, 241, 0.12);
+  }
+}
+
+/* ─── Float (gentle bobbing) ───────────────────────────────── */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* ─── Spin ─────────────────────────────────────────────────── */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ─── Bounce In ────────────────────────────────────────────── */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  70% {
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ─── Glow Pulse ───────────────────────────────────────────── */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
+  50% {
+    box-shadow: 0 0 16px 4px rgba(99, 102, 241, 0.2);
+  }
+}
+
+/* ============================================================
+   ANIMATION UTILITY CLASSES
+   ============================================================ */
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-normal) ease both;
+}
+
+.animate-fade-out {
+  animation: fadeOut var(--transition-normal) ease both;
+}
+
+.animate-slide-up {
+  animation: slideInUp var(--transition-normal) var(--ease-out-expo) both;
+}
+
+.animate-slide-right {
+  animation: slideInRight var(--transition-normal) var(--ease-out-expo) both;
+}
+
+.animate-slide-down {
+  animation: slideInDown var(--transition-fast) var(--ease-out-expo) both;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--transition-normal) var(--ease-out-expo) both;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease both;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.6s var(--ease-out-back) both;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--bg-tertiary) 25%,
+    var(--bg-hover) 50%,
+    var(--bg-tertiary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ─── Staggered Card Entrance Delays ───────────────────────── */
+.task-card:nth-child(1)  { --i: 0; }
+.task-card:nth-child(2)  { --i: 1; }
+.task-card:nth-child(3)  { --i: 2; }
+.task-card:nth-child(4)  { --i: 3; }
+.task-card:nth-child(5)  { --i: 4; }
+.task-card:nth-child(6)  { --i: 5; }
+.task-card:nth-child(7)  { --i: 6; }
+.task-card:nth-child(8)  { --i: 7; }
+.task-card:nth-child(9)  { --i: 8; }
+.task-card:nth-child(10) { --i: 9; }
+
+.stat-card:nth-child(1) { animation: cardEntrance 400ms var(--ease-out-expo) 0ms both; }
+.stat-card:nth-child(2) { animation: cardEntrance 400ms var(--ease-out-expo) 80ms both; }
+.stat-card:nth-child(3) { animation: cardEntrance 400ms var(--ease-out-expo) 160ms both; }
+.stat-card:nth-child(4) { animation: cardEntrance 400ms var(--ease-out-expo) 240ms both; }
+
+/* ─── Reduced Motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
