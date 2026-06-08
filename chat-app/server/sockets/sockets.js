@@ -66,9 +66,9 @@ export const configureSockets = (io) => {
       socket.to(roomId).emit('user_typing', { roomId, username, userId: currentUserId });
     });
 
-    socket.on('stop_typing', ({ roomId }) => {
+    socket.on('stop_typing', ({ roomId, username }) => {
       if (!roomId) return;
-      socket.to(roomId).emit('user_stopped_typing', { roomId, userId: currentUserId });
+      socket.to(roomId).emit('user_stopped_typing', { roomId, username, userId: currentUserId });
     });
 
     // Send Message

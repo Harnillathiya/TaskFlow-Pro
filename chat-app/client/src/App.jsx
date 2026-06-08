@@ -52,6 +52,17 @@ function App() {
 
   const messagesEndRef = useRef(null);
   const typingTimeoutRef = useRef(null);
+  const activeRoomRef = useRef(activeRoom);
+  const allUsersRef = useRef(allUsers);
+
+  // Sync refs with latest state
+  useEffect(() => {
+    activeRoomRef.current = activeRoom;
+  }, [activeRoom]);
+
+  useEffect(() => {
+    allUsersRef.current = allUsers;
+  }, [allUsers]);
 
   // Auto Scroll Message Feed
   const scrollToBottom = () => {
@@ -73,15 +84,19 @@ function App() {
   useEffect(() => {
     if (currentUser && token) {
       // Initialize Socket connection
-      socket = io(API_URL);
+      if (!socket) {
+        socket = io(API_URL);
+      } else if (!socket.connected) {
+        socket.connect();
+      }
 
-      socket.on('connect', () => {
+      const handleConnect = () => {
         console.log('Connected to socket server');
         socket.emit('user_connected', currentUser._id);
-      });
+      };
 
       // Presence Update
-      socket.on('user_presence', (data) => {
+      const handlePresence = (data) => {
         setAllUsers((prevUsers) => {
           const index = prevUsers.findIndex((u) => u._id === data.userId);
           if (index !== -1) {
@@ -93,37 +108,52 @@ function App() {
             return [...prevUsers, { _id: data.userId, username: data.username, avatar: data.avatar, status: data.status }];
           }
         });
-      });
+      };
 
       // Typing indicators
-      socket.on('user_typing', ({ roomId, username }) => {
+      const handleTyping = ({ roomId, username }) => {
         setTypingUsers((prev) => {
           const currentTyping = prev[roomId] ? new Set(prev[roomId]) : new Set();
           currentTyping.add(username);
           return { ...prev, [roomId]: currentTyping };
         });
-      });
+      };
 
-      socket.on('user_stopped_typing', ({ roomId, userId }) => {
+      const handleStoppedTyping = ({ roomId, username, userId }) => {
         setTypingUsers((prev) => {
           if (!prev[roomId]) return prev;
           const currentTyping = new Set(prev[roomId]);
           
-          // Look up user's username
-          const user = allUsers.find(u => u._id === userId);
-          if (user) {
-            currentTyping.delete(user.username);
+          if (username) {
+            currentTyping.delete(username);
+          } else {
+            // Look up user's username from ref fallback
+            const user = allUsersRef.current.find(u => u._id === userId);
+            if (user) {
+              currentTyping.delete(user.username);
+            }
           }
           return { ...prev, [roomId]: currentTyping };
         });
-      });
+      };
 
       // Listen for new messages
-      socket.on('new_message', (msg) => {
-        if (activeRoom && msg.room === activeRoom._id) {
+      const handleNewMessage = (msg) => {
+        const active = activeRoomRef.current;
+        if (active && msg.room === active._id) {
           setMessages((prev) => [...prev, msg]);
         }
-      });
+      };
+
+      socket.on('connect', handleConnect);
+      socket.on('user_presence', handlePresence);
+      socket.on('user_typing', handleTyping);
+      socket.on('user_stopped_typing', handleStoppedTyping);
+      socket.on('new_message', handleNewMessage);
+
+      if (socket.connected) {
+        socket.emit('user_connected', currentUser._id);
+      }
 
       // Fetch Channels / Rooms
       fetchRooms();
@@ -131,22 +161,21 @@ function App() {
       fetchUsers();
 
       setView('chat');
+
+      return () => {
+        socket.off('connect', handleConnect);
+        socket.off('user_presence', handlePresence);
+        socket.off('user_typing', handleTyping);
+        socket.off('user_stopped_typing', handleStoppedTyping);
+        socket.off('new_message', handleNewMessage);
+      };
     } else {
       if (socket) {
         socket.disconnect();
+        socket = null;
       }
     }
-
-    return () => {
-      if (socket) {
-        socket.off('connect');
-        socket.off('user_presence');
-        socket.off('user_typing');
-        socket.off('user_stopped_typing');
-        socket.off('new_message');
-      }
-    };
-  }, [currentUser, activeRoom, allUsers]);
+  }, [currentUser?._id, token]);
 
   // Load Messages on active room change
   useEffect(() => {
@@ -334,7 +363,7 @@ function App() {
     setMessageText('');
     
     // Stop typing
-    socket.emit('stop_typing', { roomId: activeRoom._id });
+    socket.emit('stop_typing', { roomId: activeRoom._id, username: currentUser.username });
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
     }
@@ -354,7 +383,7 @@ function App() {
       }
 
       typingTimeoutRef.current = setTimeout(() => {
-        socket.emit('stop_typing', { roomId: activeRoom._id });
+        socket.emit('stop_typing', { roomId: activeRoom._id, username: currentUser.username });
       }, 1500);
     }
   };
